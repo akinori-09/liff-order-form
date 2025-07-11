@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>職員室 注文フォーム</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h2>飲み物・お菓子 注文フォーム</h2>
+
+  <label>ユーザー名：
+    <input type="text" id="name" />
+  </label>
+
+  <label>職員室：
+    <select id="room">
+      <option value="職員室A">職員室A</option>
+      <option value="職員室B">職員室B</option>
+      <option value="職員室C">職員室C</option>
+    </select>
+  </label>
+
+  <label>商品名：
+    <select id="item">
+      <option value="お茶">お茶</option>
+      <option value="コーヒー">コーヒー</option>
+      <option value="クッキー">クッキー</option>
+    </select>
+  </label>
+
+  <label>数量：
+    <input type="number" id="quantity" value="1" min="1" />
+  </label>
+
+  <button onclick="submitOrder()">注文する</button>
+
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script>
+    async function submitOrder() {
+      const name = document.getElementById('name').value;
+      const room = document.getElementById('room').value;
+      const item = document.getElementById('item').value;
+      const quantity = parseInt(document.getElementById('quantity').value, 10);
+
+      const data = { name, room, item, quantity };
+
+      const response = await fetch("【ここにGASのURLを貼る】", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
+      });
+
+      if (response.ok) {
+        alert("注文を受け付けました！");
+      } else {
+        alert("注文に失敗しました。もう一度お試しください。");
+      }
+    }
+
+    liff.init({ liffId: "【ここにLIFF IDを貼る】" }).catch(console.error);
+  </script>
+</body>
+</html>
