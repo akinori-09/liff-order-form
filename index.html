@@ -38,11 +38,18 @@
 
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
-    async function submitOrder() {
-      const name = document.getElementById('name').value;
-      const room = document.getElementById('room').value;
-      const item = document.getElementById('item').value;
-      const quantity = parseInt(document.getElementById('quantity').value, 10);
+async function submitOrder() {
+  const button = document.getElementById("orderButton");
+  button.disabled = true; // ボタンを押せなくする
+  button.innerText = "送信中...";
+
+  try {
+    // ここにfetchとかの処理
+    const name = document.getElementById('name').value;
+    const room = document.getElementById('room').value;
+    const item = document.getElementById('item').value;
+    const quantity = parseInt(document.getElementById('quantity').value, 10);
+
 
       const data = { name, room, item, quantity };
 
